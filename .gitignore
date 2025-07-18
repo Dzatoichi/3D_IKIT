@@ -1,0 +1,13 @@
+# Автогенерируемые файлы
+[Tt]emp/
+[Ll]ibrary/
+[Bb]uild/
+[Oo]bj/
+*.suo
+*.userprefs
+
+# Файлы проекта
+*.unityproj
+*.sln
+*.csproj
+*.mp4

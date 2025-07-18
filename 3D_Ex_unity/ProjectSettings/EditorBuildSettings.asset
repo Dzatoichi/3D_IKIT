@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/IOC_CORIDOR/HOLL2VIDEO.unity
+    guid: cc6f6e042e5214044803dd40b891c69e
+  - enabled: 1
+    path: Assets/Scenes/IOC_CORIDOR/HOLL2.unity
+    guid: 3dc88893abf584b498b984dc15747a90
+  - enabled: 1
+    path: Assets/Scenes/201/201_ZM.unity
+    guid: 33e069547d2347441bd3fc763ad38113
+  - enabled: 1
+    path: Assets/Scenes/201/201_PM.unity
+    guid: a533650a97861664ea5f8bb852e6030b
+  - enabled: 1
+    path: Assets/Scenes/219/219_PL.unity
+    guid: e878518b2bb08f34aa765427a18b5753
+  - enabled: 1
+    path: Assets/Scenes/IOC_CORIDOR/201_202_2.unity
+    guid: 387bd75fc564d8947aba9f8fc4c2ce82
+  - enabled: 0
+    path: Assets/Scenes/IOC_CORIDOR/HOLL.unity
+    guid: 45ea10efe0c39274abfaa468651f3df1
+  - enabled: 1
+    path: Assets/Scenes/219/219_ZL_GL.unity
+    guid: 49a5b0a23b2d7ae4f82cdc642f3f0095
+  - enabled: 1
+    path: Assets/Scenes/220/220_PR_GI.unity
+    guid: ea3734ce9f25204468f7a9794dfcef48
+  - enabled: 1
+    path: Assets/Scenes/220/220_MR.unity
+    guid: 038d968969723a34eb7db488987107bb
+  - enabled: 1
+    path: Assets/Scenes/220/220_ZL.unity
+    guid: c19067ac0ab180c40a5ccfd0ba457183
+  - enabled: 1
+    path: Assets/Scenes/SC/SC_MR2.unity
+    guid: c842e79a48de3eb47bfba225f61e8bcd
+  - enabled: 1
+    path: Assets/Scenes/201/201_VIDEO.unity
+    guid: 1630acc138b46944ea22fb8610b5edbd
+  - enabled: 1
+    path: Assets/Scenes/219/219_VIDEO.unity
+    guid: 87aad175579523546b5565762e072f60
+  - enabled: 1
+    path: Assets/Scenes/220/220_VIDEO.unity
+    guid: 7b9cf0c92f4b68840906fe205c0ff43f
+  - enabled: 1
+    path: Assets/Scenes/SC/SC_VIDEO.unity
+    guid: e08dee7acdc43224face71be5eb44252
+  - enabled: 0
+    path: Assets/Scenes/SC/SC_PM.unity
+    guid: bbfdb614db45646459772842291975eb
+  - enabled: 1
+    path: Assets/Scenes/SC/SC_ML1.unity
+    guid: e68ea6ae766936c4ba6d4ebdedf3d9fe
+  - enabled: 1
+    path: Assets/Scenes/SC/SC_MR3.unity
+    guid: d6a922e313fc35240ac48ea4d418ebf7
+  - enabled: 1
+    path: Assets/Scenes/SC/SC_RZ.unity
+    guid: af88e82faa764dd49b43e3cd3674f848
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_UseUCBPForAssetBundles: 0

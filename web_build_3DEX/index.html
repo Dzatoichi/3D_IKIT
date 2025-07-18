@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D экскурсия</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>3D экскурсия по икиту</h1>
+
+    
+    <button id="launchBtn" class="launch-btn">Запустить</button>
+    
+    <div id="unityModal" class="modal">
+        <div class="modal-content" id="modalContent">
+            <div class="controls">
+                <button id="fullscreenBtn" class="control-btn fullscreen-btn" title="Полный экран">⛶</button>
+                <button id="closeBtn" class="control-btn close-btn" title="Закрыть">×</button>
+            </div>
+            <div id="unity-container">
+                <div id="loading" class="loading">Загрузка...</div>
+                <canvas id="unity-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Элементы страницы
+        const launchBtn = document.getElementById('launchBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const modal = document.getElementById('unityModal');
+        const modalContent = document.getElementById('modalContent');
+        const loading = document.getElementById('loading');
+        
+        // Переменная для хранения экземпляра Unity
+        let unityInstance = null;
+        let isFullscreen = false;
+        
+        // Обработчик открытия модального окна
+        launchBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+            
+            // Загружаем Unity только при первом клике
+            if (!unityInstance) {
+                loadUnityApp();
+            }
+        });
+        
+        // Обработчик закрытия модального окна
+        closeBtn.addEventListener('click', function() {
+            closeModal();
+        });
+        
+        // Обработчик полноэкранного режима
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+        
+        // Функция загрузки Unity
+        function loadUnityApp() {
+            const buildUrl = "Build";
+            const streamingAssetsUrl = "StreamingAssets";
+            
+            const config = {
+                dataUrl: buildUrl + "/web_build_3DEX.data",
+                frameworkUrl: buildUrl + "/web_build_3DEX.framework.js",
+                codeUrl: buildUrl + "/web_build_3DEX.wasm",
+                streamingAssetsUrl: streamingAssetsUrl,
+                companyName: "YourCompany",
+                productName: "3D Project",
+                productVersion: "1.0",
+                
+                webglContextAttributes: {
+                    preserveDrawingBuffer: false,
+                    antialias: false
+                },
+                
+                onProgress: function(progress) {
+                    loading.textContent = `Загрузка: ${Math.round(progress * 100)}%`;
+                }
+            };
+            
+            const script = document.createElement('script');
+            script.src = buildUrl + "/web_build_3DEX.loader.js";
+            script.onload = function() {
+                createUnityInstance(document.getElementById("unity-canvas"), config)
+                    .then(function(instance) {
+                        unityInstance = instance;
+                        loading.style.display = 'none';
+                        
+                        // Разрешаем аудио после жеста пользователя
+                        document.addEventListener('click', function() {
+                            if (unityInstance && unityInstance.Module.audioContext) {
+                                unityInstance.Module.audioContext.resume();
+                            }
+                        }, { once: true });
+                    })
+                    .catch(function(message) {
+                        loading.textContent = "Ошибка загрузки: " + message;
+                        console.error(message);
+                    });
+            };
+            
+            document.body.appendChild(script);
+        }
+        
+        // Функция переключения полноэкранного режима
+        function toggleFullscreen() {
+            if (!isFullscreen) {
+                modalContent.classList.add('fullscreen');
+                fullscreenBtn.textContent = '⛶';
+                isFullscreen = true;
+                
+                // Для Unity можно сообщить об изменении размера
+                if (unityInstance) {
+                    unityInstance.Module.canvas.style.width = '100%';
+                    unityInstance.Module.canvas.style.height = '100%';
+                    unityInstance.SetFullscreen(1);
+                }
+            } else {
+                modalContent.classList.remove('fullscreen');
+                fullscreenBtn.textContent = '⛶';
+                isFullscreen = false;
+                
+                if (unityInstance) {
+                    unityInstance.SetFullscreen(0);
+                }
+            }
+        }
+        
+        // Функция закрытия модального окна
+        function closeModal() {
+            modal.style.display = 'none';
+            modalContent.classList.remove('fullscreen');
+            isFullscreen = false;
+            
+            if (unityInstance) {
+                unityInstance.Module.pause();
+            }
+        }
+        
+        // Закрытие модального окна при клике вне его
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Обработка клавиши ESC для выхода из полноэкранного режима
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isFullscreen) {
+                toggleFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
