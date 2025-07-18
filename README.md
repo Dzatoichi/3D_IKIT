@@ -13,7 +13,8 @@
    git clone https://github.com/Dzatoichi/3D_IKIT
    ```
 2. Откройте проект в Unity через `File → Open Project`
-3. Для сборки выполните:
+3. Перенесите видео https://disk.yandex.ru/d/dRH0rB4hVK8CxA в директорию StreamingAssets
+4. Для сборки выполните:
    ```bash
    unity.exe -batchmode -quit -projectPath "путь/к/проекту" -executeMethod BuildScript.BuildAll
    ```
